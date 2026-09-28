@@ -1,11 +1,332 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Portfolio</title>
+    <title>[Your Name] | Developer Portfolio</title>
+    <meta
+      name="description"
+      content="[Short description of the portfolio owner and what this site shows.]"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <h1>My Portfolio</h1>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <!-- ========== HEADER / NAVBAR ========== -->
+    <header class="site-header">
+      <nav class="navbar" aria-label="Main navigation">
+        <a class="navbar-logo" href="#home">[Logo / Initials]</a>
+
+        <ul class="navbar-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#activities">Activities</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <!-- ========== HERO ========== -->
+      <section id="home" class="hero" aria-labelledby="hero-title">
+        <div class="hero-content">
+          <p class="hero-greeting">[Greeting, e.g. "Hi, I'm"]</p>
+          <h1 id="hero-title" class="hero-name">[Your Name]</h1>
+          <p class="hero-role">[Your Role / Title]</p>
+          <p class="hero-description">
+            [Short introduction: one or two sentences about who you are and what
+            you build.]
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">View Projects</a>
+            <!-- TODO: replace "#" with the GitHub profile URL -->
+            <a
+              class="btn btn-secondary"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              >GitHub</a
+            >
+          </div>
+        </div>
+
+        <!-- Mount point for the Three.js scene (Phase 4). Decorative only. -->
+        <div class="hero-visual" id="hero-3d" aria-hidden="true">
+          <!-- Three.js scene will be mounted here -->
+        </div>
+      </section>
+
+      <!-- ========== ABOUT ========== -->
+      <section id="about" class="section about" aria-labelledby="about-title">
+        <h2 id="about-title" class="section-title">About</h2>
+
+        <div class="about-content">
+          <p class="about-bio">
+            [Short biography. Replace with real information from the Project
+            Owner.]
+          </p>
+
+          <div class="about-block">
+            <h3>Developer background</h3>
+            <p>[How you started programming and what you have built so far.]</p>
+          </div>
+
+          <div class="about-block">
+            <h3>Currently learning</h3>
+            <p>[Current learning focus.]</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== PROJECTS ========== -->
+      <section
+        id="projects"
+        class="section projects"
+        aria-labelledby="projects-title"
+      >
+        <h2 id="projects-title" class="section-title">Projects</h2>
+        <p class="section-intro">[Short intro to the projects below.]</p>
+
+        <div class="projects-grid">
+          <!-- To add a project: copy one <article class="project-card"> block and edit it. -->
+          <article class="project-card">
+            <!-- Replace this placeholder with <img src="assets/projects/FILE" alt="..."> when a preview exists -->
+            <div
+              class="project-preview"
+              role="img"
+              aria-label="Preview placeholder for Google Arcade"
+            >
+              [Preview image]
+            </div>
+
+            <div class="project-body">
+              <h3 class="project-title">Google Arcade</h3>
+              <p class="project-description">[Short project description.]</p>
+
+              <ul class="project-tech" aria-label="Technologies used">
+                <li>[Tech]</li>
+                <li>[Tech]</li>
+              </ul>
+
+              <div class="project-links">
+                <!-- TODO: replace "#" with the real repository / demo URLs, or remove a link if unavailable -->
+                <a href="#" target="_blank" rel="noopener noreferrer"
+                  >GitHub<span class="visually-hidden">
+                    repository for Google Arcade</span
+                  ></a
+                >
+                <a href="#" target="_blank" rel="noopener noreferrer"
+                  >Live demo<span class="visually-hidden">
+                    of Google Arcade</span
+                  ></a
+                >
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div
+              class="project-preview"
+              role="img"
+              aria-label="Preview placeholder for Facial Attendance"
+            >
+              [Preview image]
+            </div>
+
+            <div class="project-body">
+              <h3 class="project-title">Facial Attendance</h3>
+              <p class="project-description">[Short project description.]</p>
+
+              <ul class="project-tech" aria-label="Technologies used">
+                <li>[Tech]</li>
+                <li>[Tech]</li>
+              </ul>
+
+              <div class="project-links">
+                <a href="#" target="_blank" rel="noopener noreferrer"
+                  >GitHub<span class="visually-hidden">
+                    repository for Facial Attendance</span
+                  ></a
+                >
+                <a href="#" target="_blank" rel="noopener noreferrer"
+                  >Live demo<span class="visually-hidden">
+                    of Facial Attendance</span
+                  ></a
+                >
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div
+              class="project-preview"
+              role="img"
+              aria-label="Preview placeholder for a game project"
+            >
+              [Preview image]
+            </div>
+
+            <div class="project-body">
+              <h3 class="project-title">[Game Project Name]</h3>
+              <p class="project-description">[Short project description.]</p>
+
+              <ul class="project-tech" aria-label="Technologies used">
+                <li>[Tech]</li>
+                <li>[Tech]</li>
+              </ul>
+
+              <div class="project-links">
+                <a href="#" target="_blank" rel="noopener noreferrer"
+                  >GitHub<span class="visually-hidden">
+                    repository for this game project</span
+                  ></a
+                >
+                <a href="#" target="_blank" rel="noopener noreferrer"
+                  >Live demo<span class="visually-hidden">
+                    of this game project</span
+                  ></a
+                >
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ========== SKILLS ========== -->
+      <section
+        id="skills"
+        class="section skills"
+        aria-labelledby="skills-title"
+      >
+        <h2 id="skills-title" class="section-title">Skills</h2>
+
+        <div class="skills-grid">
+          <!-- Add or remove <li> items only after the Project Owner confirms each skill. -->
+          <article class="skill-category">
+            <h3>Programming</h3>
+            <ul>
+              <li>[Skill]</li>
+            </ul>
+          </article>
+
+          <article class="skill-category">
+            <h3>Web Development</h3>
+            <ul>
+              <li>[Skill]</li>
+            </ul>
+          </article>
+
+          <article class="skill-category">
+            <h3>Tools</h3>
+            <ul>
+              <li>[Skill]</li>
+            </ul>
+          </article>
+
+          <article class="skill-category">
+            <h3>Currently Learning</h3>
+            <ul>
+              <li>[Skill]</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- ========== ACTIVITIES / EXPERIENCE ========== -->
+      <section
+        id="activities"
+        class="section activities"
+        aria-labelledby="activities-title"
+      >
+        <h2 id="activities-title" class="section-title">Activities</h2>
+
+        <ol class="activities-list">
+          <!-- To add an activity: copy one <li> block and edit it. -->
+          <li>
+            <article class="activity-item">
+              <h3 class="activity-title">[Activity / Role]</h3>
+              <p class="activity-meta">
+                <span class="activity-place"
+                  >[Organization / School / Event]</span
+                >
+                <time class="activity-date">[Period]</time>
+              </p>
+              <p class="activity-description">
+                [Short description of what you did.]
+              </p>
+            </article>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ========== CERTIFICATES / ACHIEVEMENTS (optional) ========== -->
+      <!-- Optional: delete this whole section if it is not needed. It has no navbar link. -->
+      <section
+        id="certificates"
+        class="section certificates"
+        aria-labelledby="certificates-title"
+      >
+        <h2 id="certificates-title" class="section-title">
+          Certificates &amp; Achievements
+        </h2>
+
+        <div class="certificates-grid">
+          <article class="certificate-card">
+            <h3 class="certificate-title">[Certificate / Achievement Title]</h3>
+            <p class="certificate-issuer">[Issuer / Event]</p>
+            <time class="certificate-date">[Date]</time>
+            <!-- Optional: add a link or an <img> here when available -->
+          </article>
+        </div>
+      </section>
+
+      <!-- ========== CONTACT ========== -->
+      <section
+        id="contact"
+        class="section contact"
+        aria-labelledby="contact-title"
+      >
+        <h2 id="contact-title" class="section-title">Contact</h2>
+        <p class="section-intro">[Short invitation to get in touch.]</p>
+
+        <ul class="contact-list">
+          <li>
+            <span class="contact-label">Email</span>
+            <!-- TODO: replace with mailto:your-email once provided -->
+            <a href="#">[Email address]</a>
+          </li>
+          <li>
+            <span class="contact-label">GitHub</span>
+            <!-- TODO: replace "#" with the GitHub profile URL -->
+            <a href="#" target="_blank" rel="noopener noreferrer"
+              >[GitHub username]</a
+            >
+          </li>
+          <!-- Optional: add LinkedIn or other links here only if the Project Owner provides them -->
+        </ul>
+      </section>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="site-footer">
+      <p class="footer-copyright">
+        &copy; 2026 [Your Name]. All rights reserved.
+      </p>
+      <p class="footer-note">Personal developer portfolio.</p>
+      <!-- TODO: replace "#" with the GitHub profile URL -->
+      <a class="footer-link" href="#" target="_blank" rel="noopener noreferrer"
+        >GitHub</a
+      >
+    </footer>
+
+    <!-- Scripts are added in later phases:
+         Phase 3: js/main.js
+         Phase 4: js/three-scene.js
+         Phase 5: js/animations.js -->
   </body>
 </html>
