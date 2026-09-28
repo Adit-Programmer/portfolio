@@ -1,1 +1,808 @@
-/* Main stylesheet. Filled in Phase 2 (CSS / Visual System). */
+/* ==========================================================================
+   Portfolio stylesheet: Monochrome Developer theme
+   Order: 1 Reset/Base, 2 Tokens, 3 Typography, 4 Layout, 5 Accessibility,
+   6 Header, 7 Hero, 8 Buttons, 9 Sections, 10 About, 11 Projects, 12 Skills,
+   13 Activities, 14 Certificates, 15 Contact, 16 Footer, 17 Responsive,
+   18 Reduced Motion
+   ========================================================================== */
+
+/* Fonts: only the weights used below. System fonts are the fallback. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@500;600&display=swap");
+
+/* 1. RESET / BASE
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body,
+h1,
+h2,
+h3,
+p,
+ul,
+ol {
+  margin: 0;
+}
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Links: underline is hidden until hover/focus, so every link shares one style. */
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.35em;
+  transition:
+    color var(--ease),
+    text-decoration-color var(--ease);
+}
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+::selection {
+  background: var(--color-white);
+  color: var(--color-black);
+}
+
+/* 2. DESIGN TOKENS
+   ========================================================================== */
+:root {
+  /* Palette (monochrome only) */
+  --color-black: #0a0a0a;
+  --color-charcoal: #161616;
+  --color-dark-gray: #2a2a2a;
+  --color-gray: #666666;
+  --color-medium-gray: #8c8c8c;
+  --color-light-gray: #bdbdbd;
+  --color-off-white: #ededed;
+  --color-white: #ffffff;
+
+  /* Roles: change these to re-theme the site */
+  --color-bg: var(--color-black);
+  --color-surface: var(--color-charcoal);
+  --color-border: var(--color-dark-gray);
+  --color-border-strong: var(--color-gray);
+  --color-text: var(--color-off-white);
+  --color-text-soft: var(--color-light-gray);
+  --color-text-muted: var(--color-medium-gray);
+  --color-heading: var(--color-white);
+  --color-focus: var(--color-white);
+
+  /* Fonts */
+  --font-heading:
+    "Space Grotesk", "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  --font-body:
+    "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+
+  /* Type scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-h3: clamp(1.25rem, 1rem + 1vw, 1.625rem);
+  --text-h2: clamp(2rem, 1.25rem + 3vw, 3.5rem);
+  --text-h1: clamp(2.5rem, 1rem + 8vw, 6.5rem);
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 3rem;
+  --space-xl: clamp(4rem, 3rem + 5vw, 8rem);
+
+  /* Layout and misc */
+  --container-max: 72rem;
+  --page-gutter: max(1.25rem, calc((100% - var(--container-max)) / 2));
+  --header-height: 4.5rem;
+  --radius: 2px;
+  --ease: 0.2s ease;
+}
+
+/* 3. TYPOGRAPHY
+   ========================================================================== */
+h1,
+h2,
+h3 {
+  color: var(--color-heading);
+  font-family: var(--font-heading);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+h2 {
+  font-size: var(--text-h2);
+}
+h3 {
+  font-size: var(--text-h3);
+}
+
+/* 4. LAYOUT / CONTAINER
+   Sections are full width; the gutter token centers the content
+   at --container-max without extra wrapper elements.
+   ========================================================================== */
+.navbar,
+.hero,
+.section,
+.site-footer {
+  padding-inline: var(--page-gutter);
+}
+
+main {
+  counter-reset: section;
+}
+
+/* 5. ACCESSIBILITY
+   ========================================================================== */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  top: -4rem;
+  left: var(--space-sm);
+  z-index: 200;
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--color-white);
+  color: var(--color-black);
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: var(--radius);
+  transition: top var(--ease);
+}
+.skip-link:focus {
+  top: var(--space-sm);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+/* 6. HEADER / NAVIGATION
+   Mobile: logo above the links (links wrap). Sticky bar starts at tablet width.
+   ========================================================================== */
+.site-header {
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: var(--header-height);
+  padding-block: var(--space-xs);
+}
+
+.navbar-logo {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: var(--color-heading);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-sm);
+}
+
+.navbar-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: var(--color-text-soft);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.navbar-links a:hover,
+.navbar-links a[aria-current] {
+  color: var(--color-white);
+}
+
+/* 7. HERO
+   ========================================================================== */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto;
+  align-items: center;
+  gap: var(--space-lg);
+  min-height: 32rem;
+  padding-block: var(--space-lg);
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+.hero-greeting {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hero-name {
+  font-size: var(--text-h1);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  overflow-wrap: break-word;
+}
+
+.hero-role {
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+}
+
+.hero-description {
+  max-width: 34rem;
+  color: var(--color-text-soft);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+/* Reserved area for the Three.js scene (Phase 4). Faint grid only. */
+.hero-visual {
+  position: relative;
+  width: 100%;
+  max-width: 24rem;
+  aspect-ratio: 1;
+  border: 1px solid var(--color-border);
+  background-image:
+    linear-gradient(var(--color-surface) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-surface) 1px, transparent 1px);
+  background-size: 2.5rem 2.5rem;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "Scroll to explore";
+  content: "Scroll to explore" / "";
+  grid-column: 1 / -1;
+  align-self: end;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* 8. BUTTONS
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  min-height: 2.75rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--color-white);
+  border-radius: var(--radius);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    background-color var(--ease),
+    color var(--ease),
+    border-color var(--ease),
+    transform var(--ease);
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--color-white);
+  color: var(--color-black);
+}
+.btn-primary:hover {
+  background: transparent;
+  color: var(--color-white);
+}
+
+.btn-secondary {
+  border-color: var(--color-border-strong);
+  background: transparent;
+  color: var(--color-white);
+}
+.btn-secondary:hover {
+  border-color: var(--color-white);
+  background: var(--color-surface);
+}
+.btn-secondary::after {
+  content: "\2197";
+  content: "\2197" / "";
+}
+
+/* 9. SECTIONS (shared)
+   Each .section gets an automatic number (01, 02, ...) above its title.
+   ========================================================================== */
+.section {
+  padding-block: var(--space-xl);
+  counter-increment: section;
+}
+
+.section-title::before {
+  content: counter(section, decimal-leading-zero) " \2014";
+  content: counter(section, decimal-leading-zero) " \2014" / "";
+  display: block;
+  margin-bottom: var(--space-xs);
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.section-intro {
+  max-width: 40rem;
+  margin-top: var(--space-sm);
+  color: var(--color-text-soft);
+}
+
+/* Space between a section heading and its content */
+.about-content,
+.projects-grid,
+.skills-grid,
+.activities-list,
+.certificates-grid,
+.contact-list {
+  margin-top: var(--space-lg);
+}
+
+/* 10. ABOUT
+   ========================================================================== */
+.about-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-lg);
+}
+
+.about-bio {
+  max-width: 38rem;
+  color: var(--color-text);
+  font-size: var(--text-lg);
+  line-height: 1.55;
+}
+
+.about-block {
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.about-block h3 {
+  margin-bottom: var(--space-xs);
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.about-block p {
+  color: var(--color-text-soft);
+}
+
+/* 11. PROJECTS
+   ========================================================================== */
+.projects-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-md);
+  counter-reset: project;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  counter-increment: project;
+  transition:
+    border-color var(--ease),
+    background-color var(--ease),
+    transform var(--ease);
+}
+.project-card:hover,
+.project-card:focus-within {
+  border-color: var(--color-border-strong);
+  background: var(--color-surface);
+}
+.project-card:hover {
+  transform: translateY(-4px);
+}
+
+.project-preview {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 10;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.project-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+}
+
+.project-body::before {
+  content: counter(project, decimal-leading-zero);
+  content: counter(project, decimal-leading-zero) / "";
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  letter-spacing: 0.16em;
+}
+
+.project-title {
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.project-description {
+  color: var(--color-text-soft);
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+.project-tech li {
+  padding: 0.125rem var(--space-xs);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text-soft);
+  font-size: var(--text-xs);
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-md);
+  margin-top: auto;
+}
+.project-links a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: var(--color-white);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.project-links a::after {
+  content: "\2197";
+  content: "\2197" / "";
+  margin-left: 0.35rem;
+  transition: transform var(--ease);
+}
+.project-links a:hover::after {
+  transform: translate(2px, -2px);
+}
+
+/* 12. SKILLS
+   Category rows: number, category name, items.
+   ========================================================================== */
+.skills-grid {
+  counter-reset: skill;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.skill-category {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  column-gap: var(--space-xs);
+  row-gap: var(--space-xs);
+  padding-block: var(--space-md);
+  border-top: 1px solid var(--color-border);
+  counter-increment: skill;
+}
+.skill-category::before {
+  content: counter(skill, decimal-leading-zero);
+  content: counter(skill, decimal-leading-zero) / "";
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  letter-spacing: 0.1em;
+}
+
+.skill-category h3 {
+  font-size: var(--text-base);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.skill-category ul {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-md);
+  color: var(--color-text-soft);
+}
+
+/* 13. ACTIVITIES
+   ========================================================================== */
+.activities-list {
+  margin-left: 0.3rem;
+  border-left: 1px solid var(--color-border-strong);
+}
+
+.activities-list > li {
+  position: relative;
+  padding: 0 0 var(--space-lg) var(--space-md);
+}
+.activities-list > li:last-child {
+  padding-bottom: 0;
+}
+
+.activities-list > li::before {
+  content: "";
+  position: absolute;
+  top: 0.45rem;
+  left: -0.3rem;
+  width: 0.6rem;
+  height: 0.6rem;
+  border: 1px solid var(--color-white);
+  background: var(--color-bg);
+}
+
+.activity-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-md);
+  margin-top: 0.25rem;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.activity-description {
+  max-width: 40rem;
+  margin-top: var(--space-sm);
+  color: var(--color-text-soft);
+}
+
+/* 14. CERTIFICATES (optional section)
+   ========================================================================== */
+.certificates-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-md);
+}
+
+.certificate-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+}
+
+.certificate-issuer {
+  color: var(--color-text-soft);
+}
+
+.certificate-date {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+/* 15. CONTACT
+   ========================================================================== */
+.contact .section-title {
+  font-size: var(--text-h1);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.contact-list {
+  border-top: 1px solid var(--color-border);
+}
+
+.contact-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-xs) var(--space-lg);
+  padding-block: var(--space-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.contact-label {
+  min-width: 6rem;
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.contact-list a {
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 0.75rem + 2vw, 2rem);
+  overflow-wrap: anywhere;
+}
+
+/* 16. FOOTER
+   ========================================================================== */
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xs) var(--space-md);
+  padding-block: var(--space-md);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: var(--color-text-soft);
+}
+.footer-link:hover {
+  color: var(--color-white);
+}
+
+/* 17. RESPONSIVE (mobile-first: base styles above are the mobile layout)
+   Tablet: 48rem (768px)   Desktop: 64rem (1024px)
+   ========================================================================== */
+@media (min-width: 48rem) {
+  html {
+    scroll-padding-top: var(--header-height);
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .navbar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .about-content {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  }
+  .about-bio {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+  .about-block {
+    grid-column: 2;
+  }
+
+  .projects-grid,
+  .certificates-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skill-category {
+    grid-template-columns: 4rem minmax(10rem, 1fr) 2fr;
+  }
+  .skill-category ul {
+    grid-column: 3;
+    grid-row: 1;
+  }
+}
+
+@media (min-width: 64rem) {
+  .hero {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-rows: 1fr auto;
+    column-gap: var(--space-xl);
+    min-height: calc(100vh - var(--header-height));
+    min-height: calc(100svh - var(--header-height));
+    padding-block: var(--space-xl) var(--space-md);
+  }
+
+  .hero-visual {
+    max-width: 32rem;
+    justify-self: end;
+  }
+
+  .projects-grid,
+  .certificates-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* 18. REDUCED MOTION
+   Smooth scrolling only when allowed; all Phase 2 transitions are removed
+   for people who prefer reduced motion.
+   ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+
+  .btn:hover,
+  .project-card:hover,
+  .project-links a:hover::after {
+    transform: none;
+  }
+}
